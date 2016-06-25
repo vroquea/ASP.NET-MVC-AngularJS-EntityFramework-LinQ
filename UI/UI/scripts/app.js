@@ -27,7 +27,7 @@ app.controller('ProductsCtrl', function ($scope,$http) {
                     showLoaderOnConfirm: true,
                     type: 'error',
                     title: 'Error',
-                    text: 'Ha ocurrido un error, pruebe mas tade',
+                    text: 'Ha ocurrido un error, pruebe mas tarde',
                     showCancelButton: false,
                     showConfirmButton:false
                 });
