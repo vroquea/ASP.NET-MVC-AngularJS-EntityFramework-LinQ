@@ -2,43 +2,72 @@
 @{
     ViewBag.Title = "Lista de Productos";
 }
+<div ng-controller="ProductsCtrl">
+    <div class="row">
+        <h2 class="text-center">Gestión de Productos</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="input-group-lg">
+                <input type="text" class="form-control" style="width:100%; min-width:100%;" placeholder="Search for..." ng-model="searchProduct">
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <label>
+                                <input type="checkbox" id="selectAll" />
+                            </label>
+                        </th>
+                        <th>Nombre</th>
+                        <th>Cantidad Por Unidad</th>
+                        <th class="text-right">Precio Unitario</th>
+                        <th class="text-right">Unidades en Stock</th>
+                        <th class="text-right">Unidades en Orden</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="product in products | limitTo: position | limitTo: -10 | filter : searchProduct">
+                        <td>
+                            <label>
+                                <input type="checkbox" name="productCheck" value="{{product.ProductID}}" />
+                            </label>
+                        </td>
+                        <td>{{product.ProductName}}</td>
+                        <td>{{product.QuantityPerUnit}}</td>
+                        <td class="text-right">{{product.UnitPrice | currency}}</td>
+                        <td class="text-right">{{product.UnitsInStock}}</td>
+                        <td class="text-right">{{product.UnitsOnOrder}}</td>
+                        <td><a class="btn btn-info" href="~/Productos/Detalle/{{product.ProductID}}">Detalle</a></td>
+                        <td><a class="btn btn-success" href="~/Productos/Editar/{{product.ProductID}}">Editar</a></td>
+                        <td><a class="btn btn-danger" href="~/Productos/Eliminar/{{product.ProductID}}">Eliminar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-<div class="row">
-    <h2 class="text-center">Productos</h2>
+        <div class="row text-center">
+            <button class="btn btn-info" ng-click="previousProducts()" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                Anterior
+            </button>
+            <span>{{position/10}} / {{products.length/10 | roundUp}}</span>
+            <button class="btn btn-info" ng-click="nextProducts()" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                Siguiente
+            </button>
+            
+        </div>
+    </div>
 </div>
 
-<div class="table-responsive" ng-controller="ProductsCtrl">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    <label>
-                        <input  type="checkbox" id="selectAll"/>
-                    </label>
-                </th>
-                <th>Nombre</th>
-                <th>Cantidad Por Unidad</th>
-                <th class="text-right">Precio Unitario</th>
-                <th class="text-right">Unidades en Stock</th>
-                <th class="text-right">Unidades en Orden</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="product in products">
-                <td>
-                    <label>
-                        <input type="checkbox" name="productCheck" value="{{product.ProductID}}" />
-                    </label>
-                </td>
-                <td>{{product.ProductName}}</td>
-                <td>{{product.QuantityPerUnit}}</td>
-                <td class="text-right">{{product.UnitPrice | currency}}</td>
-                <td class="text-right">{{product.UnitsInStock}}</td>
-                <td class="text-right">{{product.UnitsOnOrder}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+
+
 <script>
     $(document).ready(function () {
         $('#selectAll').click(function (event) {  //on click 

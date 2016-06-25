@@ -18,7 +18,7 @@ namespace UI.Controllers.api
             {
                 using (var db = new NWEntities())
                 {
-                    return db.Products.ToList();
+                    return db.Products.OrderBy(x=>x.ProductName).ToList();
                 }
             }
             catch (SerializationException ex)
