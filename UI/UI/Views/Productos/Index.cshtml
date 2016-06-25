@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Lista de Productos";
+}
+
+<div class="row">
+    <h2 class="text-center">Productos</h2>
+</div>
+
+<div class="table-responsive" ng-controller="ProductsCtrl">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <label>
+                        <input  type="checkbox" id="selectAll"/>
+                    </label>
+                </th>
+                <th>Nombre</th>
+                <th>Cantidad Por Unidad</th>
+                <th class="text-right">Precio Unitario</th>
+                <th class="text-right">Unidades en Stock</th>
+                <th class="text-right">Unidades en Orden</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in products">
+                <td>
+                    <label>
+                        <input type="checkbox" name="productCheck" value="{{product.ProductID}}" />
+                    </label>
+                </td>
+                <td>{{product.ProductName}}</td>
+                <td>{{product.QuantityPerUnit}}</td>
+                <td class="text-right">{{product.UnitPrice | currency}}</td>
+                <td class="text-right">{{product.UnitsInStock}}</td>
+                <td class="text-right">{{product.UnitsOnOrder}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#selectAll').click(function (event) {  //on click 
+            if (this.checked) { // check select status
+                $('input[type=checkbox]').each(function () { //loop through each checkbox
+                    this.checked = true;  //select all checkboxes with class "checkbox1"               
+                });
+            } else {
+                $('input[type=checkbox]').each(function () { //loop through each checkbox
+                    this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+                });
+            }
+        });
+
+    });
+</script>
