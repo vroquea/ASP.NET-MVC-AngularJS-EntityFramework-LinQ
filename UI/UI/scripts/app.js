@@ -17,7 +17,7 @@ app.controller('ProductsCtrl', function ($scope,$http) {
         text: 'Esto puede tomar unos segundos',
         showConfirmButton: false
     });
-    $http.get('http://localhost:61510/api/Productos')
+    $http.get(document.location.origin + '/' + 'api/Productos')
             .success(function (data) {
                 $scope.products = data;
                 swal.close();
@@ -56,18 +56,11 @@ app.controller('ProductDetailCtrl', function ($scope, $http, $routeParams) {
     $scope.categories = [];
     $scope.productFinal = {};
     $scope.init = function () {
-        $http.get('http://localhost:61510/api/Productos/' + $routeParams.ProductID)
+        $http.get(document.location.origin + '/' + 'api/Productos/' + $routeParams.ProductID)
         .success(function (data) {
             $scope.product = data;
             angular.copy(data, $scope.productFinal);
-            swal({
-                showLoaderOnConfirm: true,
-                type: 'info',
-                title: 'Cargando',
-                text: 'Esto puede tomar unos segundos',
-                showConfirmButton: false
-            });
-            $http.get('http://localhost:61510/api/Categorias')
+            $http.get(document.location.origin + '/' + 'api/Categorias')
                     .success(function (data) {
                         $scope.categories = data;
                         
@@ -123,7 +116,7 @@ app.controller('CategoriesCtrl', function ($scope, $http) {
         text: 'Esto puede tomar unos segundos',
         showConfirmButton: false
     });
-    $http.get('http://localhost:61510/api/Categorias')
+    $http.get(document.location.origin +'/' + 'api/Categorias')
             .success(function (data) {
                 $scope.categories = data;
                 swal.close();
