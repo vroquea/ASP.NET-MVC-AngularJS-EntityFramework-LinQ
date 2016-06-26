@@ -20,3 +20,12 @@ and...
 * CodeFirst
 
 I've developed with Visual Studio 2015 and SQL SERVER 2014
+
+Don't forget to change this connection string when you clone this project:
+
+```
+<configSections>
+  <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+  <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+</configSections>
+```
