@@ -44,6 +44,76 @@ app.controller('ProductsCtrl', function ($scope,$http) {
         }
     };
 });
+app.controller('ProductDetailCtrl', function ($scope, $http, $routeParams) {
+    swal({
+        showLoaderOnConfirm: true,
+        type: 'info',
+        title: 'Cargando',
+        text: 'Esto puede tomar unos segundos',
+        showConfirmButton: false
+    });
+    $scope.product = {};
+    $scope.categories = [];
+    $scope.productFinal = {};
+    $scope.init = function () {
+        $http.get('http://localhost:61510/api/Productos/' + $routeParams.ProductID)
+        .success(function (data) {
+            $scope.product = data;
+            angular.copy(data, $scope.productFinal);
+            swal({
+                showLoaderOnConfirm: true,
+                type: 'info',
+                title: 'Cargando',
+                text: 'Esto puede tomar unos segundos',
+                showConfirmButton: false
+            });
+            $http.get('http://localhost:61510/api/Categorias')
+                    .success(function (data) {
+                        $scope.categories = data;
+                        
+                        swal.close();
+                    })
+                    .error(function () {
+                        swal({
+                            showLoaderOnConfirm: true,
+                            type: 'error',
+                            title: 'Error',
+                            text: 'Ha ocurrido un error, pruebe mas tarde',
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        });
+                    });
+            swal.close();
+        })
+        .error(function (data) {
+            swal({
+                showLoaderOnConfirm: true,
+                type: 'error',
+                title: 'Error',
+                text: 'Ha ocurrido un error, pruebe mas tarde',
+                showCancelButton: false,
+                showConfirmButton: false
+            });
+        });
+    };
+    
+
+    $scope.edit = true;
+
+    
+
+    $scope.enableEdit = function () {
+        $scope.edit = false;
+    };
+    $scope.cancelEdit = function () {
+        $scope.edit = true;
+        angular.copy($scope.productFinal, $scope.product);
+    };
+    $scope.saveEdit = function () {
+        angular.copy($scope.productFinal, $scope.product);
+        $scope.edit = true;
+    };
+});
 app.controller('CategoriesCtrl', function ($scope, $http) {
     $scope.categories = [];
     swal({
@@ -90,6 +160,10 @@ app.config(function ($routeProvider) {
         .when('/Productos', {
             templateUrl: '/Productos/Index',
             controller: 'ProductsCtrl'
+        })
+        .when('/Producto/:ProductID', {
+            templateUrl: 'Productos/Detalle',
+            controller: 'ProductDetailCtrl'
         })
         .when('/Categorias', {
             templateUrl: '/Categorias/Index',

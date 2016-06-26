@@ -1,0 +1,54 @@
+﻿<div ng-controller="ProductDetailCtrl">
+    <div class="row">
+        <h2 class="text-center">Detalle {{product.ProductName}}</h2>
+    </div>
+
+    <div class="row">
+        <form ng-init="init()">
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="ProductName">Nombre del producto</label>
+                <input type="text" class="form-control" ng-readonly="edit" id="ProductName" ng-model="product.ProductName" name="ProductName" placeholder="Nombre" value="{{product.ProductName}}">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="QuantityPerUnit">Cantidad por Unidad</label>
+                <input type="text" class="form-control" ng-readonly="edit" id="QuantityPerUnit" ng-model="product.QuantityPerUnit" name="QuantityPerUnit" placeholder="Cantidad por Unidad" value="{{product.QuantityPerUnit}}">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="UnitPrice">Precio Unitario</label>
+                <input type="number" class="form-control" ng-readonly="edit" step="any" id="UnitPrice" ng-model="product.UnitPrice" ng-value="product.UnitPrice | number:2" name="UnitPrice" placeholder="Precio Unitario" >
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="UnitsInStock">Unidades en Stock</label>
+                <input type="number" class="form-control" ng-readonly="edit" id="UnitsInStock" ng-model="product.UnitsInStock" ng-value="product.UnitsInStock" name="UnitsInStock" placeholder="Unidades en Stock">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="UnitsInStock">Unidades en Orden</label>
+                <input type="number" class="form-control" ng-readonly="edit" id="UnitsOnOrder" ng-model="product.UnitsOnOrder" ng-value="product.UnitsOnOrder" name="UnitsOnOrder" placeholder="Unidades en Orden">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Categoría</label>
+                <select class="form-control" ng-readonly="edit" ng-model="product.CategoryID" ng-options="category.CategoryID as category.CategoryName for category in categories">
+                    <option>Categoria No Seleccionada</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <a class="btn btn-info" href="#/Productos/">
+                Volver
+            </a>
+            <button class="btn btn-primary" ng-click="enableEdit()" ng-show="edit">
+                Editar
+            </button>
+            <button class="btn btn-success" ng-click="saveEdit()" ng-show="!edit">
+                Guardar Cambios
+            </button>
+            <button class="btn btn-danger" ng-click="cancelEdit()" ng-show="!edit">
+                Cancelar
+            </button>
+
+        </div>
+    </div>
+</div>

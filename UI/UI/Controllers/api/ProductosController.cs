@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -28,9 +29,21 @@ namespace UI.Controllers.api
         }
 
         // GET: api/Productos/5
-        public string Get(int id)
+        public Product Get(int id)
         {
-            return "value";
+            try
+            {
+                using (var db = new NWEntities())
+                {
+                    var data = db.Products.Where(x => x.ProductID == id).Include("Category").FirstOrDefault();
+                    return data;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                throw;
+            }
         }
 
         // POST: api/Productos

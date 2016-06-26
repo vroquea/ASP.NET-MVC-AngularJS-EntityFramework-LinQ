@@ -13,5 +13,9 @@ namespace UI.Controllers
         {
             return PartialView();
         }
+        public ActionResult Detalle()
+        {
+            return PartialView();
+        }
     }
 }

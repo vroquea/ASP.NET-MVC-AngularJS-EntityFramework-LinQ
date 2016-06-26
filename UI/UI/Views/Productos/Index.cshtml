@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Gestión de productos";
 }
-<div ng-controller="ProductsCtrl" class="container">
+<div ng-controller="ProductsCtrl">
     <div class="row">
         <h2 class="text-center">Gestión de Productos</h2>
     </div>
@@ -45,9 +45,9 @@
                         <td class="text-right">{{product.UnitPrice | currency}}</td>
                         <td class="text-right">{{product.UnitsInStock}}</td>
                         <td class="text-right">{{product.UnitsOnOrder}}</td>
-                        <td><a class="btn btn-info" href="~/Productos/Detalle/{{product.ProductID}}">Detalle</a></td>
-                        <td><a class="btn btn-success" href="~/Productos/Editar/{{product.ProductID}}">Editar</a></td>
-                        <td><a class="btn btn-danger" href="~/Productos/Eliminar/{{product.ProductID}}">Eliminar</a></td>
+                        <td><a class="btn btn-info" href="#/Producto/{{product.ProductID}}">Detalle</a></td>
+                        <td><a class="btn btn-success" href="#/Productos/Editar/{{product.ProductID}}">Editar</a></td>
+                        <td><a class="btn btn-danger" href="#/Productos/Eliminar/{{product.ProductID}}">Eliminar</a></td>
                     </tr>
                 </tbody>
             </table>
