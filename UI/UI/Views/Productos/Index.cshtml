@@ -1,18 +1,20 @@
-﻿
-@{
-    ViewBag.Title = "Gestión de productos Productos";
+﻿@{
+    ViewBag.Title = "Gestión de productos";
 }
-<div ng-controller="ProductsCtrl">
+<div ng-controller="ProductsCtrl" class="container">
     <div class="row">
         <h2 class="text-center">Gestión de Productos</h2>
     </div>
+    
     <div class="row">
         <div class="col-lg-12">
             <div class="input-group-lg">
-                <input type="text" class="form-control" style="width:100%; min-width:100%;" placeholder="Search for..." ng-model="searchProduct">
+                <input type="text" class="form-control" style="width:100%; min-width:100%;" placeholder="Buscar producto..." ng-model="searchProduct">
             </div><!-- /input-group -->
         </div><!-- /.col-lg-6 -->
     </div><!-- /.row -->
+    <hr />
+    <div class="divider"></div>
     <div class="row">
         <div class="table-responsive">
             <table class="table table-striped">
@@ -52,15 +54,18 @@
         </div>
 
         <div class="row text-center">
-            <button class="btn btn-info" ng-click="previousProducts()" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                Anterior
-            </button>
-            <span>{{position/10}} / {{products.length/10 | roundUp}}</span>
-            <button class="btn btn-info" ng-click="nextProducts()" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                Siguiente
-            </button>
+            <div class="col-lg-12">
+                <button class="btn btn-info" ng-click="previousProducts()" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    Anterior
+                </button>
+                <span>{{position/10}} / {{products.length/10 | roundUp}}</span>
+                <button class="btn btn-info" ng-click="nextProducts()" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    Siguiente
+                </button>
+            </div>
+            <label>{{products.length}} productos</label>
             
         </div>
     </div>

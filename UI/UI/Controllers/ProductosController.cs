@@ -11,7 +11,7 @@ namespace UI.Controllers
         // GET: Productos
         public ActionResult Index()
         {
-            return View();
+            return PartialView();
         }
     }
 }

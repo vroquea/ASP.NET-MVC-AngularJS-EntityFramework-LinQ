@@ -6,14 +6,9 @@ using System.Web.Mvc;
 
 namespace UI.Controllers
 {
-    public class HomeController : Controller
+    public class CategoriasController : Controller
     {
-        public ActionResult Home()
-        {
-            return PartialView();
-        }
-
-        // GET: Home
+        // GET: Categorias
         public ActionResult Index()
         {
             return PartialView();

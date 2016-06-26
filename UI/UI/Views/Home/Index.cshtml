@@ -1,11 +1,56 @@
 ﻿
 @{
-    ViewBag.Title = "Página Principal";
+    ViewBag.Title = "Dhamyc";
 }
 
-<div class="row">
-    <h2 class="text-center">Home</h2>
-</div>
+<!DOCTYPE html>
+<html ng-app="Dhamyc">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - AngularJS</title>
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/sweetalert.min.css")
+    @Styles.Render("~/Content/Site.css")
+
+    @Scripts.Render("~/scripts/jquery-1.12.4.min.js")
+    @Scripts.Render("~/scripts/angular.min.js")
+    @Scripts.Render("~/scripts/angular-route.min.js")
+    @Scripts.Render("~/scripts/app.js")
+    @Scripts.Render("~/scripts/bootstrap.min.js")
+    @Scripts.Render("~/scripts/sweetalert.min.js")
+</head>
+<body ng-controller="mainCtrl">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#/" class="navbar-brand">Dhamyc</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/Productos/">Productos</a></li>
+                    <li><a href="#/Categorias/">Categorías</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <div ng-view></div>
+        <hr />
+    </div>
+    <footer class="text-center">
+        <p>&copy; @DateTime.Now.Year -Dhamyc</p>
+    </footer>
+
+</body>
+</html>
 
 
 
