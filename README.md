@@ -1,4 +1,4 @@
-# ASP.NET-MVC-AngularJS-EntityFramework-LinQ
+# Using ASP.NET MVC with AngularJS
 
 This is a simple example using ASP.NET MVC + Entity Framework Code First from DataBase + AngularJS. The DB that I'm using here is northwind you can download from here https://northwinddatabase.codeplex.com/. 
 
