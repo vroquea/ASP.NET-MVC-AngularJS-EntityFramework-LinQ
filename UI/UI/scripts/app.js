@@ -10,28 +10,32 @@ app.controller('mainCtrl',function($scope){
 });
 app.controller('ProductsCtrl', function ($scope,$http) {
     $scope.products = [];
-    swal({
-        showLoaderOnConfirm: true,
-        type: 'info',
-        title: 'Cargando',
-        text: 'Esto puede tomar unos segundos',
-        showConfirmButton: false
-    });
-    $http.get(document.location.origin + '/' + 'api/Productos')
-            .success(function (data) {
-                $scope.products = data;
-                swal.close();
-            })
-            .error(function () {
-                swal({
-                    showLoaderOnConfirm: true,
-                    type: 'error',
-                    title: 'Error',
-                    text: 'Ha ocurrido un error, pruebe mas tarde',
-                    showCancelButton: false,
-                    showConfirmButton:false
+    $scope.init = function () {
+        swal({
+            showLoaderOnConfirm: true,
+            type: 'info',
+            title: 'Cargando',
+            text: 'Esto puede tomar unos segundos',
+            showConfirmButton: false
+        });
+        $http.get(document.location.origin + '/' + 'api/Productos', { headers: { 'Cache-Control': 'no-cache' } })
+                .success(function (data) {
+                    $scope.products = data;
+                    console.info('Cargado');
+                    swal.close();
+                })
+                .error(function () {
+                    swal({
+                        showLoaderOnConfirm: true,
+                        type: 'error',
+                        title: 'Error',
+                        text: 'Ha ocurrido un error, pruebe mas tarde',
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    });
                 });
-            });
+    }
+
     $scope.position = 10;
     $scope.nextProducts = function () {
         if ($scope.products.length > $scope.position) {
@@ -90,10 +94,7 @@ app.controller('ProductDetailCtrl', function ($scope, $http, $routeParams) {
         });
     };
     
-
     $scope.edit = true;
-
-    
 
     $scope.enableEdit = function () {
         $scope.edit = false;
@@ -103,34 +104,148 @@ app.controller('ProductDetailCtrl', function ($scope, $http, $routeParams) {
         angular.copy($scope.productFinal, $scope.product);
     };
     $scope.saveEdit = function () {
-        angular.copy($scope.productFinal, $scope.product);
+
+        swal({
+            title: "¿Esta seguro?",
+            text: "Se cambiara la información de este producto",
+            type: "warning", showCancelButton: true,
+            confirmButtonColor: "#009688",
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                angular.copy($scope.product, $scope.productFinal);
+                swal({
+                    showLoaderOnConfirm: true,
+                    type: 'info',
+                    title: 'Guardando',
+                    text: 'Esto puede tomar unos segundos',
+                    showConfirmButton: false
+                });
+                $http.post(document.location.origin + '/' + 'api/Productos', $scope.productFinal)
+                    .success(function () {
+                        swal({
+                            title: "Actualizado!", text: "Se ha modificado el producto", type: 'success', timer: 1000, showConfirmButton: false
+                        });
+                    })
+                .error(function () {
+                    swal({
+                        showLoaderOnConfirm: true,
+                        type: 'error',
+                        title: 'Error',
+                        text: 'Ha ocurrido un error, pruebe mas tarde',
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    });
+                });
+            }
+            else {
+
+                swal("Cancelado", "Se ha cancelado", "info");
+            }
+        });
+
+
+
+
+
+
+        $scope.edit = true;
+    };
+});
+app.controller('ProductNewCtrl', function ($scope, $http) {
+    $scope.product = {};
+    $scope.categories = [];
+    $scope.init = function () {
+
+        $http.get(document.location.origin + '/' + 'api/Categorias')
+                    .success(function (data) {
+                        $scope.categories = data;
+                    })
+                    .error(function () {
+                        swal({
+                            showLoaderOnConfirm: true,
+                            type: 'error',
+                            title: 'Error',
+                            text: 'Ha ocurrido un error, pruebe mas tarde',
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        });
+                    });
+    };
+    $scope.save = function () {
+        swal({
+            title: "¿Esta seguro?",
+            text: "Esta seguro de que desea insertar este nuevo producto",
+            type: "warning", showCancelButton: true,
+            confirmButtonColor: "#009688",
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                swal({
+                    showLoaderOnConfirm: true,
+                    type: 'info',
+                    title: 'Guardando',
+                    text: 'Esto puede tomar unos segundos',
+                    showConfirmButton: false
+                });
+                $http.post(document.location.origin + '/' + 'api/Productos', $scope.product)
+                    .success(function () {
+                        swal({
+                            title: "Guardado!", text: "Se ha insertado el producto", type: 'success', timer: 1000, showConfirmButton: false
+                        });
+                    })
+                .error(function () {
+                    swal({
+                        showLoaderOnConfirm: true,
+                        type: 'error',
+                        title: 'Error',
+                        text: 'Ha ocurrido un error, pruebe mas tarde',
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    });
+                });
+            }
+            else {
+
+                swal("Cancelado", "Se ha cancelado", "info");
+            }
+        });
+
         $scope.edit = true;
     };
 });
 app.controller('CategoriesCtrl', function ($scope, $http) {
     $scope.categories = [];
-    swal({
-        showLoaderOnConfirm: true,
-        type: 'info',
-        title: 'Cargando',
-        text: 'Esto puede tomar unos segundos',
-        showConfirmButton: false
-    });
-    $http.get(document.location.origin +'/' + 'api/Categorias')
-            .success(function (data) {
-                $scope.categories = data;
-                swal.close();
-            })
-            .error(function () {
-                swal({
-                    showLoaderOnConfirm: true,
-                    type: 'error',
-                    title: 'Error',
-                    text: 'Ha ocurrido un error, pruebe mas tarde',
-                    showCancelButton: false,
-                    showConfirmButton: false
+    $scope.init = function () {
+        swal({
+            showLoaderOnConfirm: true,
+            type: 'info',
+            title: 'Cargando',
+            text: 'Esto puede tomar unos segundos',
+            showConfirmButton: false
+        });
+        $http.get(document.location.origin + '/' + 'api/Categorias')
+                .success(function (data) {
+                    $scope.categories = data;
+                    swal.close();
+                })
+                .error(function () {
+                    swal({
+                        showLoaderOnConfirm: true,
+                        type: 'error',
+                        title: 'Error',
+                        text: 'Ha ocurrido un error, pruebe mas tarde',
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    });
                 });
-            });
+    };
     $scope.position = 10;
     $scope.nextCategories = function () {
         if ($scope.categories.length > $scope.position) {
@@ -153,6 +268,10 @@ app.config(function ($routeProvider) {
         .when('/Productos', {
             templateUrl: '/Productos/Index',
             controller: 'ProductsCtrl'
+        })
+        .when('/Productos/Nuevo', {
+            templateUrl: '/Productos/Nuevo',
+            controller: 'ProductNewCtrl'
         })
         .when('/Producto/:ProductID', {
             templateUrl: 'Productos/Detalle',

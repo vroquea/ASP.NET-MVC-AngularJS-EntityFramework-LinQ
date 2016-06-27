@@ -8,14 +8,20 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <div class="input-group-lg">
-                <input type="text" class="form-control" style="width:100%; min-width:100%;" placeholder="Buscar producto..." ng-model="searchProduct">
+            <div class="input-group-sm">
+                <input type="text" class="form-control" style="width:100%; " placeholder="Buscar producto..." ng-model="searchProduct">
             </div><!-- /input-group -->
         </div><!-- /.col-lg-6 -->
     </div><!-- /.row -->
     <hr />
-    <div class="divider"></div>
     <div class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="#/Productos/Nuevo">Agregar Producto</a>
+        </div>
+    </div>
+    <hr />
+    <div class="divider"></div>
+    <div class="row" ng-init="init()">
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -34,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="product in products | limitTo: position | limitTo: -10 | filter : searchProduct">
+                    <tr ng-repeat="product in products | filter : searchProduct | limitTo: position | limitTo: -10 ">
                         <td>
                             <label>
                                 <input type="checkbox" name="productCheck" value="{{product.ProductID}}" />

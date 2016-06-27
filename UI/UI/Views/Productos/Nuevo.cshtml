@@ -1,0 +1,48 @@
+﻿<div ng-controller="ProductNewCtrl">
+    <div class="row">
+        <h2 class="text-center">Nuevo Producto</h2>
+    </div>
+
+    <div class="row">
+        <form>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="ProductName">Nombre del producto</label>
+                <input type="text" class="form-control" id="ProductName" ng-model="product.ProductName" name="ProductName" placeholder="Nombre">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="QuantityPerUnit">Cantidad por Unidad</label>
+                <input type="text" class="form-control" id="QuantityPerUnit" ng-model="product.QuantityPerUnit" name="QuantityPerUnit" placeholder="Cantidad por Unidad">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="UnitPrice">Precio Unitario</label>
+                <input type="number" class="form-control" step="any" id="UnitPrice" ng-model="product.UnitPrice" name="UnitPrice" placeholder="Precio Unitario">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="UnitsInStock">Unidades en Stock</label>
+                <input type="number" class="form-control" id="UnitsInStock" ng-model="product.UnitsInStock" name="UnitsInStock" placeholder="Unidades en Stock">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="UnitsInStock">Unidades en Orden</label>
+                <input type="number" class="form-control" id="UnitsOnOrder" ng-model="product.UnitsOnOrder" name="UnitsOnOrder" placeholder="Unidades en Orden">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Categoría</label>
+                <select class="form-control" ng-model="product.CategoryID" ng-init="init();">
+                    <option>Categoria No Seleccionada</option>
+                    <option ng-repeat="category in categories" value="{{category.CategoryID}}">{{category.CategoryName}}</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <a class="btn btn-info" href="#/Productos/">
+                Volver
+            </a>
+            <button class="btn btn-primary" ng-click="save()">
+                Guardar
+            </button>
+        </div>
+    </div>
+</div>

@@ -17,5 +17,9 @@ namespace UI.Controllers
         {
             return PartialView();
         }
+        public ActionResult Nuevo()
+        {
+            return PartialView();
+        }
     }
 }

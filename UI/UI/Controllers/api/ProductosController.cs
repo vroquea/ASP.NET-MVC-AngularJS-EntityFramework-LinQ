@@ -15,17 +15,11 @@ namespace UI.Controllers.api
         // GET: api/Productos
         public IEnumerable<Product> Get()
         {
-            try
-            {
                 using (var db = new NWEntities())
                 {
-                    return db.Products.OrderBy(x=>x.ProductName).ToList();
+                    var data = db.Products.OrderBy(x => x.ProductName).ToList();
+                    return data;
                 }
-            }
-            catch (SerializationException ex)
-            {
-                throw ex;
-            }
         }
 
         // GET: api/Productos/5
@@ -47,8 +41,34 @@ namespace UI.Controllers.api
         }
 
         // POST: api/Productos
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Product product)
         {
+            try
+            {
+                using (var db = new NWEntities())
+                {
+                    var myProduct = db.Products.Where(x => x.ProductID == product.ProductID).FirstOrDefault();
+
+                    if (myProduct != null)
+                    {
+                        db.Entry(myProduct).State = EntityState.Modified;
+                        db.Entry(myProduct).CurrentValues.SetValues(product);
+                    }
+                    else
+                    {
+                        db.Products.Add(product);
+                    }
+                   
+
+                    db.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         // PUT: api/Productos/5
