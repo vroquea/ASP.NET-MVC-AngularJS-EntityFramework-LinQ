@@ -1,0 +1,6 @@
+{
+  "name": "AngularJS y ASP.NET MVC",
+  "tagline": "This is a simple example using ASP.NET MVC + Entity Framework Code First from DataBase + AngularJS. The DB that I'm using here is northwind you can download from here https://northwinddatabase.codeplex.com/. If you want to use this solution you don't need change anything, APIs Url are dynamics. This project is incomplete for the moment, it just show products list but, you can see also categories list if you put the API url in your browser.",
+  "body": "\r\n# Usando AngularJS y ASP.NET MVC\r\n\r\n# Componentes utilizados\r\n\r\n* Bootstrap\r\n* Jquery\r\n* AngularJS\r\n* Angular Route\r\n* SweetAlert\r\n* C#\r\n* ASP.NET\r\n* MS SQL\r\n* Entity Framework\r\n\r\n# Base de datos\r\n\r\nLa base de datos la puedes obtener al momento de clonar el proyecto es el típico NW así que si la tienes ya instalada servirá igual, deberás de cambiar la cadena de conexión en caso de que tengas problemas (dependiendo de como instalaste tu MS SQL.",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
